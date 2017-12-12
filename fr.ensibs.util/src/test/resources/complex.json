@@ -1,0 +1,6 @@
+{
+    "name": "complex",
+    "ref": {
+        "name": "simple"
+    }
+}

@@ -1,0 +1,10 @@
+<resources>
+    <!-- Application name -->
+    <string name="app_name">Sprite</string>
+
+    <!-- GUI string values -->
+    <string name="image_content">Sprite</string>
+    <string name="start_button">\u25b6</string>
+    <string name="stop_button">\u25fc</string>
+    <string name="pause_button">\u25eb</string>
+</resources>

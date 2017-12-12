@@ -1,0 +1,4 @@
+<resources>
+    <!-- Application name -->
+    <string name="app_name">Android utils</string>
+</resources>
