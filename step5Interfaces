@@ -1,0 +1,19 @@
+Snapshot implements List<SnapshotLayer>
+    long time;
+    getTime();
+    Snapshot(long time);
+    .....
+SnapshotLayer
+    SnapshotLayer(long time,Image image,int width, int height,int posX,int posY)
+    void setPos(int posX, int posX);
+    Getters ....
+fr.ensibs.sprite
+    Movie : getSnapshot()
+    Sprite :getSnapshot()
+    Stage ...
+fr.ensibs.collections.FIFO<T> extends ArrayBlockingQueue
+fr.ensibs.collections.ObjectHolder<T>
+    T get()
+    void put(T)
+
+
