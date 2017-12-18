@@ -1,5 +1,9 @@
 package fr.ensibs.sprite;
 
+import fr.ensibs.graphic.Snapshot;
+import fr.ensibs.graphic.SnapshotLayer;
+import fr.ensibs.sprite.action.SpriteAction;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +22,12 @@ public class Movie {
     private int width, height;              // the size of the sequences
     private long duration;                  // the duration of the movie
 
+    //Snapshot attributes
+    private int seqIndex;
+    private long lastSeqEnd;
+    private long time;
+
+
     //---------------------------------------------------------------
     // Constructors
     //---------------------------------------------------------------
@@ -26,6 +36,9 @@ public class Movie {
      */
     public Movie() {
         this.sequences = new ArrayList<>();
+        this.time = 0;
+        this.lastSeqEnd=0;
+        this.seqIndex=0;
     }
 
     //---------------------------------------------------------------
@@ -78,6 +91,21 @@ public class Movie {
      */
     public int getHeight() {
         return height;
+    }
+
+    //TODO
+    public void setCurrentTime(long time){
+        this.time = time;
+        if(sequences.get(seqIndex) == null || (time-lastSeqEnd)>sequences.get(seqIndex).getDuration()){
+        }
+    }
+
+    //TODO
+    public Snapshot getSnapshot(){
+        Snapshot ss = new Snapshot(time);
+
+        return ss;
+
     }
 
     //---------------------------------------------------------------
