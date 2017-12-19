@@ -93,19 +93,39 @@ public class Movie {
         return height;
     }
 
-    //TODO
+    /**
+     * Modify the model's time and set the state of the movie
+     * @param time
+     */
     public void setCurrentTime(long time){
-        this.time = time;
-        if(sequences.get(seqIndex) == null || (time-lastSeqEnd)>sequences.get(seqIndex).getDuration()){
+
+        //Sequencement normal
+        if(time > this.time){
+
+            //Changement de sequence ?
+            if(time-lastSeqEnd>sequences.get(seqIndex).getDuration()){
+                sequences.get(seqIndex).setCurrentTime(0);
+                lastSeqEnd+=sequences.get(seqIndex).getDuration();
+                seqIndex++;
+            }
+            //SetCurrentTime for current sequence
+            sequences.get(seqIndex).setCurrentTime(time-lastSeqEnd);
         }
+        //Retour arriere
+        else{
+            //TODO one day
+        }
+
+        this.time = time;
     }
 
-    //TODO
+
+    /**
+     * Get a Snapshot of the current state
+     * @return
+     */
     public Snapshot getSnapshot(){
-        Snapshot ss = new Snapshot(time);
-
-        return ss;
-
+        return sequences.get(seqIndex).getSnapshot();
     }
 
     //---------------------------------------------------------------

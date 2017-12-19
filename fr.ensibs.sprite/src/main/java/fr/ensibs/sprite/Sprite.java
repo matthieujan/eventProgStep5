@@ -19,6 +19,13 @@ public class Sprite {
     private final long duration;      // total duration to display the images (in s)
     private int width, height;        // size of the images
 
+    //State related
+    private int x,y;
+    private boolean visible;
+    private long startTime;
+    private long time;
+    private Image currentImage;
+
     //---------------------------------------------------------------
     // Constructors
     //---------------------------------------------------------------
@@ -32,6 +39,10 @@ public class Sprite {
         this.name = name;
         this.duration = duration;
         this.images = new ArrayList<>();
+        this.x = 0;
+        this.y = 0;
+        this.visible = false;
+        this.startTime = 0;
     }
 
     /**
@@ -147,5 +158,47 @@ public class Sprite {
         hash = 41 * hash + this.width;
         hash = 41 * hash + this.height;
         return hash;
+    }
+
+    //TODO Documentation ...
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        if(visible && !this.visible){
+            startTime = time;
+            setCurrentTime(time);
+        }
+        this.visible = visible;
+    }
+
+    public void setCurrentTime(long time) {
+        this.time = time;
+        if(visible){
+            int deltaT = (int) ((time - startTime)%duration);
+            int indexImage = deltaT/images.size();
+            currentImage = images.get(indexImage);
+        }
+    }
+
+    public Image getCurrentImage() {
+        return currentImage;
     }
 }
