@@ -201,4 +201,13 @@ public class Sprite {
     public Image getCurrentImage() {
         return currentImage;
     }
+
+    public void reset() {
+        x = 0;
+        y = 0;
+        visible = false;
+        time = 0;
+        startTime = 0;
+        currentImage = null;
+    }
 }

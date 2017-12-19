@@ -259,6 +259,7 @@ public class Sequence {
 
     public Snapshot getSnapshot() {
         Snapshot snap = new Snapshot(time);
+        snap.add(new SnapshotLayer(stage.getBackground(),0,0));
         SnapshotLayer snapLayer;
         for(Sprite s : sprites){
             if(s.isVisible()){
@@ -267,5 +268,16 @@ public class Sequence {
             }
         }
         return snap;
+    }
+
+    public void reset() {
+        actions.addAll(actionsDoing);
+        actions.addAll(actionsDone);
+        actionsDoing.clear();
+        actionsDone.clear();
+        this.time = 0;
+        for(Sprite s : sprites){
+            s.reset();
+        }
     }
 }

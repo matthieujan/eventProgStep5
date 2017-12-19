@@ -113,10 +113,20 @@ public class Movie {
         }
         //Retour arriere
         else{
-            //TODO one day
+            this.reset();
+            setCurrentTime(time);
         }
 
         this.time = time;
+    }
+
+    private void reset() {
+        this.seqIndex = 0;
+        this.time = 0;
+        this.lastSeqEnd = 0;
+        for(Sequence seq : sequences){
+            seq.reset();
+        }
     }
 
 
