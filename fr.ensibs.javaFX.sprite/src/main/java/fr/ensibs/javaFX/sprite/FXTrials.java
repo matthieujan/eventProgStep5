@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
+
+import fr.ensibs.sprite.Movie;
 import javafx.scene.canvas.Canvas;
 
 /**
@@ -34,7 +36,7 @@ public class FXTrials {
      * @param canvas graphic object
      * @param configuration the configuration properties
      */
-    public FXTrials(FileSystem fileSystem, Canvas canvas, Configuration configuration) {
+    public FXTrials(FileSystem fileSystem, Canvas canvas, Configuration configuration, Movie movie) {
         this.fileSystem = fileSystem;
         this.canvas = canvas;
         this.configuration = configuration;
@@ -47,14 +49,7 @@ public class FXTrials {
      * Display the background image and the sprite and start the sprite motion
      */
     public void startTrial() {
-        String images = configuration.get("images");
-        String background = configuration.get("background");
-        try {
-            Map<String, Image> imagesLibrary = loadImages(fileSystem, images);
-            drawImage(imagesLibrary.get(background));
-        } catch (IOException e) {
-            System.err.println("Unable to load images");
-        }
+
     }
 
     //---------------------------------------------------------------

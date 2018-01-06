@@ -181,7 +181,7 @@ public class Sequence {
         return hash;
     }
 
-    //TODO
+    //TODO REDO SETCURRENTTIME WITH SMART THINKING ...
     public void setCurrentTime(long time) {
         //If normal time flow
         if (this.time < time) {
@@ -252,7 +252,8 @@ public class Sequence {
         }
         //if reverse time flow
         else if (this.time > time) {
-
+            this.reset();
+            this.setCurrentTime(time);
         }
         this.time = time;
     }

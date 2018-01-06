@@ -3,6 +3,9 @@ package fr.ensibs.javaFX.sprite;
 import static fr.ensibs.javaFX.sprite.Status.PAUSE;
 import static fr.ensibs.javaFX.sprite.Status.START;
 import static fr.ensibs.javaFX.sprite.Status.STOP;
+
+import fr.ensibs.engines.TimeEvent;
+import fr.ensibs.engines.TimeObservable;
 import fr.ensibs.sync.Scheduler;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -106,6 +109,7 @@ public class StatusBar extends BorderPane {
     private void timeChanged(long oldValue, long newValue) {
         if (newValue != oldValue) {
             timeLabel.setText(timeToString(newValue, duration));
+            TimeObservable.getInstance().notifyObservers(new TimeEvent(newValue));
         }
     }
 

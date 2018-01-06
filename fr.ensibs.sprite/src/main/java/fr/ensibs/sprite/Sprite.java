@@ -193,7 +193,7 @@ public class Sprite {
         this.time = time;
         if(visible){
             int deltaT = (int) ((time - startTime)%duration);
-            int indexImage = deltaT/images.size();
+            int indexImage = deltaT%images.size();
             currentImage = images.get(indexImage);
         }
     }

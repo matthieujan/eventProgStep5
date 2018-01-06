@@ -15,7 +15,17 @@
         <dependency>
             <groupId>fr.ensibs</groupId>
             <artifactId>javaFX</artifactId>
-            <version>1.1</version>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.ensibs</groupId>
+            <artifactId>sprite</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.ensibs</groupId>
+            <artifactId>gui</artifactId>
+            <version>1.4</version>
         </dependency>
     </dependencies>
     <build>

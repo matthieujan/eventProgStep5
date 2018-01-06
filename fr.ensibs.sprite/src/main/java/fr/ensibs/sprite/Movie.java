@@ -111,6 +111,10 @@ public class Movie {
             //SetCurrentTime for current sequence
             sequences.get(seqIndex).setCurrentTime(time-lastSeqEnd);
         }
+        // Meme temps (rien ne se passe)
+        else if(time == this.time){
+
+        }
         //Retour arriere
         else{
             this.reset();

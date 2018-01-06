@@ -1,9 +1,19 @@
 package fr.ensibs.javaFX.sprite;
 
 import fr.ensibs.conf.Configuration;
+import fr.ensibs.engines.SpriteEngine;
+import fr.ensibs.engines.TimeObservable;
+import fr.ensibs.engines.UserEngine;
 import fr.ensibs.fs.FileSystem;
+import fr.ensibs.graphic.Image;
+import fr.ensibs.graphic.ImagesLoader;
 import fr.ensibs.javaFX.fs.FXFileSystem;
+import fr.ensibs.javaFX.graphic.FXGraphic;
+import fr.ensibs.javaFX.graphic.FXImageFactory;
 import fr.ensibs.javaFX.sync.FXSchedulerFactory;
+import fr.ensibs.json.JsonReader;
+import fr.ensibs.sprite.Movie;
+import fr.ensibs.sprite.json.MovieJsonConverter;
 import fr.ensibs.sync.Scheduler;
 import fr.ensibs.sync.SchedulerFactory;
 import javafx.application.Application;
@@ -13,6 +23,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+import java.util.zip.ZipInputStream;
 
 /**
  * The JavaFX GUI system: a JavaFX Application composed of a Pane with a main
@@ -31,6 +46,10 @@ public class FXGUI extends Application {
     private Canvas canvas;                    // graphic object
     private FileSystem fileSystem;            // the file system
     private Configuration configuration;      // the configuration properties
+    private Movie movie;
+    private SpriteEngine spriteEngine;
+    private UserEngine userEngine;
+    private FXGraphicEngine fxGraphicEngine;
 
     //---------------------------------------------------------------
     // Main
@@ -65,9 +84,10 @@ public class FXGUI extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // trial: show the background image
-        FXTrials trials = new FXTrials(fileSystem, canvas, configuration);
-        trials.startTrial();
+        spriteEngine.start();
+        userEngine.start();
+        fxGraphicEngine.start();
+
     }
 
     //---------------------------------------------------------------
@@ -84,6 +104,25 @@ public class FXGUI extends Application {
         // get configuration properties
         this.fileSystem = new FXFileSystem();
         this.configuration = new Configuration(fileSystem, DEFAULT_CONF);
+
+        Map<String,Image> images= null;
+
+        ImagesLoader loader = new ImagesLoader(new FXImageFactory());
+        try (InputStream in = fileSystem.getInputStream(configuration.get("images"))) {
+            if (in != null) {
+                images = loader.loadImages(new ZipInputStream(in));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JsonReader<Movie> jsonReader = new JsonReader(new MovieJsonConverter(images));
+        try {
+            this.movie = jsonReader.readJson(fileSystem.getInputStream("movie.json"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         int width = configuration.getInt("width");
         int height = configuration.getInt("height");
         long duration = configuration.getLong("duration");
@@ -95,6 +134,12 @@ public class FXGUI extends Application {
         this.canvas = new Canvas(width, height);
         moviePane.getChildren().add(canvas);
 
+
+        //Drawing test
+        FXGraphic fxGraphic = new FXGraphic(canvas);
+        movie.setCurrentTime(0);
+        fxGraphic.drawSnapshot(movie.getSnapshot());
+
         // make the bottom status bar
         SchedulerFactory schedulerFactory = new FXSchedulerFactory();
         Scheduler scheduler = schedulerFactory.makeScheduler(period);
@@ -104,6 +149,17 @@ public class FXGUI extends Application {
         BorderPane rootPane = new BorderPane();
         rootPane.setCenter(moviePane);
         rootPane.setBottom(statusBar);
+
+        //SpriteEngine
+        spriteEngine = new SpriteEngine(movie);
+
+        //UserEngine
+        userEngine = new UserEngine();
+        TimeObservable.getInstance().addObserver(userEngine);
+
+        //FXGraphicEngine
+        Scheduler fxGraphicScheduler = schedulerFactory.makeScheduler(period);
+        fxGraphicEngine = new FXGraphicEngine(canvas,fxGraphicScheduler);
 
         return rootPane;
     }

@@ -1,0 +1,163 @@
+{
+    "sprites": [
+        {
+	    "name": "bird",
+	    "duration": 1500,
+	    "images": [
+		"bird-01.png", "bird-02.png", "bird-03.png",
+		"bird-04.png", "bird-05.png", "bird-06.png",
+		"bird-07.png", "bird-08.png", "bird-09.png",
+		"bird-10.png", "bird-11.png", "bird-12.png", 
+		"bird-13.png"
+	    ]
+	},
+	{
+	    "name": "tux",
+	    "duration": 1,
+	    "images": [ "tux.png" ]
+	},
+        {
+	    "name": "deer",
+	    "duration": 2000,
+	    "images": [
+		"deer-01.png", "deer-02.png", "deer-03.png",
+		"deer-04.png", "deer-05.png", "deer-06.png",
+		"deer-07.png"
+	    ]
+	}
+    ],
+    "sequences": [
+        {
+            "stage": {
+                "width": 1024,
+                "height": 768,
+                "background": "background-0.png"
+            },
+            "duration": 15000,
+            "sprites": [ "bird" ],
+            "actions": [
+                {
+                    "sprite": "bird",
+                    "time": 0,
+                    "visible": true,
+                    "x": 0,
+                    "y": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 500,
+                    "endTime": 7500,
+                    "startX": 0,
+                    "startY": 120,
+                    "endX": 420,
+                    "endY": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 7500,
+                    "endTime": 9000,
+                    "startX": 420,
+                    "startY": 120,
+                    "endX": 540,
+                    "endY": 20
+                },
+                {
+                    "sprite": "bird",
+                    "time": 9000,
+                    "endTime": 11000,
+                    "startX": 540,
+                    "startY": 20,
+                    "endX": 640,
+                    "endY": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 11000,
+                    "endTime": 14000,
+                    "startX": 640,
+                    "startY": 120,
+                    "endX": 900,
+                    "endY": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 14000,
+                    "visible": false,
+                    "x": 900,
+                    "y": 120
+                }
+            ]
+        },
+        {
+            "stage": {
+                "width": 1024,
+                "height": 768,
+                "background": "background-1.png"
+            },
+            "duration": 15000,
+            "sprites": [ "bird", "tux", "deer" ],
+            "actions": [
+                {
+                    "sprite": "bird",
+                    "time": 0,
+                    "visible": true,
+                    "x": 0,
+                    "y": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 500,
+                    "endTime": 12000,
+                    "startX": 0,
+                    "startY": 120,
+                    "endX": 900,
+                    "endY": 120
+                },
+                {
+                    "sprite": "bird",
+                    "time": 12000,
+                    "visible": false,
+                    "x": 900,
+                    "y": 120
+                },
+                {
+                    "sprite": "tux",
+                    "time": 0,
+                    "visible": true,
+                    "x": 443,
+                    "y": 476
+                },
+                {
+                    "sprite": "tux",
+                    "time": 14000,
+                    "visible": false,
+                    "x": 443,
+                    "y": 476
+                },
+                {
+                    "sprite": "deer",
+                    "time": 7000,
+                    "visible": true,
+                    "x": 798,
+                    "y": 426
+                },
+                {
+                    "sprite": "deer",
+                    "time": 7000,
+                    "endTime": 14500,
+                    "startX": 798,
+                    "startY": 426,
+                    "endX": -134,
+                    "endY": 426
+                },
+                {
+                    "sprite": "deer",
+                    "time": 15000,
+                    "visible": false,
+                    "x": -134,
+                    "y": 426
+                }
+            ]
+        }
+    ]
+}
