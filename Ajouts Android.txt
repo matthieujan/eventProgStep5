@@ -1,0 +1,31 @@
+
+2.2) Création de la classe AndroidGraphic. 
+Même principe que FXGraphic (classe qui pose des objets de type Image sur un Canvas) : 
+Pour android on doit poser des objets de type Bitmap sur un Canvas (cf. Google canvas.drawBitmap())
+Or on a déjà une classe AndroidImage avec une méthode qui retourne un objet Bitmap donc il suffit de le réutiliser dans AndroidGraphic
+
+2.3) Pas fait par Matthieu donc pas fait par moi non plus :p
+
+
+3.3) Ajout de la ligne 103 qui est un copié collé de ce que matthieu a mis pour javaFX, puisque c'est la même méthode ?!
+Je comprends pas la remarque de Matthieu dans sa TODO liste, mais comme je peux pas tester pour visualiser le problème dont il parle...*
+
+
+4.4)
+Ajout de quelques import.
+
+Ajout des lignes 42 à 53.
+On cherche à lire une bibliothèque d'image. Si elle existe, utilisation de la méthode get() de la classe ImageLoader (ensibs.gui), sinon exception.
+
+Ajout des lignes 59 à 64.
+Copié collé de ce que matthieu a écrit. J'ai juste fait import JsonReader, qui est dans fr.ensibs.util.json
+
+
+Partie 5 -> Faite par Matthieu
+
+
+Partie 6
+Comme Matthieu n'a pas fait de Factory, pareil pour Android, donc attention aux notation, y'a jamais de machinEngineFactory, juste des machinEngine
+AndroidGraphicEngine : Exactement comme FXGraphicEngine, sauf que j'ai mis Android à la place des FX...
+StatusBar : Ajout des import engines.[...]. Mais je sais pas où ils interviennent...
+AndroidGUI : Import + Ajout de engines.start à la fin
