@@ -6,7 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import fr.ensibs.sync.Scheduler;
+import fr.ensibs.engines.TimeEvent;
+import fr.ensibs.engines.TimeObservable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -100,6 +103,8 @@ public class StatusBar {
         if (this.progress != progress) {
             this.progress = progress;
             timeLabel.setText(timeToString(progress, duration));
+            TimeObservable.getInstance().notifyObservers(new TimeEvent(newValue));
+
         }
     }
 

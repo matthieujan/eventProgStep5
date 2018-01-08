@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Built-By: Coco
+Class-Path: lib/javaFX-1.2.jar lib/util-1.2.jar lib/json-20170516.jar 
+ lib/sprite-1.2.jar lib/gui-1.4.jar
+Build-Jdk: 1.8.0_151
+Created-By: Maven Integration for Eclipse
+Main-Class: fr.ensibs.javaFX.sprite.FXGUI
+
